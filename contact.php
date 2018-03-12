@@ -1,50 +1,21 @@
-<html>
-	<body>
-		<?php
-			$name=$_POST['name'];
-			$email=$_POST['email'];
-			$subject=$_POST['subject'];
-			$message=$_POST['message'];
-
-			$to="ami99b@gmail.com";
-
-			$message="From:$name <br />".$message;
-
-			$headers = "MIME-Version: 1.0" . "\r\n";
-			$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
-
-			// More headers
-			$headers .= 'From: Admin Teknologi Informasi <ami99b@gmail.com>'."\r\n" . 'Reply-To: '.$name.' <'.$email.'>'."\r\n";
-			@mail($to,$subject,$message,$headers);
-			if(@mail)
-			{
-			echo "Email sent successfully !!";	
-			}
-			?>
-			
-				<form action="">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Nama">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="Email">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" name="subject" placeholder="Judul"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" name="message" rows="3" placeholder="Pesan"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-info">Kirim Pesan</button>
-                </form>
-	</body>
-</html>
+<?php
+$name = $_POST['name'];
+$email = $_POST['email'];
+$message = $_POST['message'];
+ 
+$to = 'ami99b@gmail.com';
+$subject = $_POST['subject'];
+$email_message = "Form details below.\n\n";
+$email_message .= "From: ".$name."\n";
+$email_message .= "Email: ".$email."\n";
+$email_message .= "Message: ".$message."\n";
+    
+$headers = 'From: admin@is-its.com' . "\r\n";
+ 
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) { // this line checks that we have a valid email address
+mail($to, $subject, $email_message, $headers); //This method sends the mail.
+echo "Your email was sent!<br><a href='/'>Close</a>"; // success message
+}else{
+echo "Invalid Email, please provide an correct email.";
+}
+?>

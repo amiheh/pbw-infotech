@@ -319,7 +319,8 @@ Institut Teknologi Sepuluh Nopember
                 <div class="section-container-spacer">
                     <h2 class="text-center">Hubungi Kami</h2>
                 </div>
-                <form action="">
+                
+                <form action="contact.php" method="post" id="form-email">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -334,16 +335,14 @@ Institut Teknologi Sepuluh Nopember
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" placeholder="Pesan"></textarea>
+                        <textarea class="form-control" name="subject" placeholder="Judul"></textarea>
                     </div>
 
-                    <div class="form-group" style="float: left">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1">Kirimkan salinan
-                        </label>
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="3" placeholder="Pesan"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-info" style="float: right">Kirim Pesan</button>
+                    <button type="submit" class="btn btn-info" id="btn-email">Kirim Pesan</button>
                 </form>
             </div>
         </div>
@@ -351,6 +350,7 @@ Institut Teknologi Sepuluh Nopember
 </div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function (event) {
     
@@ -358,42 +358,36 @@ document.addEventListener("DOMContentLoaded", function (event) {
   scrollToAnchor();
   scrollRevelation('reveal');
 });
+
+
+$(document).ready(function(){
+    $('#btn-email').click(function(){
+        $.post("contact.php", $("#form-email").serialize(), function(response) {
+            $('#form-email input, #form-email textarea').text("");
+            $('#success').html(response).fadeIn(500);
+            $('#success a').click(function(){
+                $('#success').fadeOut(500);
+                return false;
+            });
+        });
+        return false;
+    });
+});
 </script>
 
 <footer class="footer-container white-text-container">
     <div class="container">
         <div class="row">
-                <div class="col-md-4">
-					<img src="https://www.its.ac.id/wp-content/uploads/2017/07/logo.png" width="180px" /><br>
-                </div>
-
-                <div class="col-md-4">
-                    <h4>Seleksi Masuk</h4>
-                    <div>
-						<a href="https://smits.its.ac.id/sarjana/#snmptn" target="_blank">SNMPTN</a><br>
-						<a href="https://smits.its.ac.id/sarjana/#sbmptn" target="_blank">SBMPTN</a><br>
-						<a href="https://smits.its.ac.id/sarjana/#pkm" target="_blank">PKM</a>
-                    </div><br>
-                    <div>
-                        
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-                        
-                    <h4>Subscribe to newsletter</h4>
-                    
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" class="form-control footer-input-text">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default btn-newsletter ">OK</button>
-                            </div>
-                        </div>
-                        <p><small><br>Template by <a href="http://www.mashup-template.com/" title="Create website with free html template">Mashup Template</a>/<a href="https://www.unsplash.com/" title="Beautiful Free Images">Unsplash</a></small></p>
-                        
-                    </div>
+                <div class="col-md-12" style="text-align: center">
+                            <a href="https://www.twitter.com" class="fa-icon" title="">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+							</a>
+                            <a href="https://www.facebook.com" class="fa-icon" title="">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.instagram.com" class="fa-icon" title="">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                            </a>
                 </div>
         </div>
     </div>
