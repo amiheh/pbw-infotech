@@ -14,7 +14,7 @@ $headers = 'From: admin@is-its.com' . "\r\n";
  
 if (filter_var($email, FILTER_VALIDATE_EMAIL)) { // this line checks that we have a valid email address
 mail($to, $subject, $email_message, $headers); //This method sends the mail.
-echo "Your email was sent!<br><a href='/'>Close</a>"; // success message
+echo "Your email was sent!"; // success message
 }else{
 echo "Invalid Email, please provide an correct email.";
 }

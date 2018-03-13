@@ -312,6 +312,85 @@ Institut Teknologi Sepuluh Nopember
 </div>
 
 
+<div class="section-container section-half-background-image-container" style="background:  #333;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 col-md-12">
+                    <h2 style="color:  white;" class="text-center section-container-spacer">Galeri</h2>
+                </div>
+                <div class="col-xs-12 col-md-12">
+                <style> .foto-galeri { height: 200px; background: #aaa; padding: 0; overflow: hidden; text-align: center; background-size: cover; position: relative; } .captions { opacity: 0; position: absolute; color: #fff; background: rgba(51,51,51,.5); transition-duration: .3s; padding: 15px; width: 100%; height: 100%} .captions:hover { opacity: 1} </style>
+                <?php
+                    $koneksi = new mysqli("localhost", "id4889425_root", "password", "id4889425_foto");
+                    if(mysqli_connect_errno()) {
+                    	echo "Gagal melakukan koneksi ke MySQL: " . $koneksi->connect_error;
+                    }
+                    
+                    $sql = "select * FROM simpan ORDER BY id DESC LIMIT 4";
+                    $tampil = mysqli_query($koneksi,$sql);
+                    while ($data = mysqli_fetch_array($tampil)){
+                    // Tampilkan Gambar
+                        echo "<div class='col-xs-6 col-md-6 foto-galeri' style='background-image: url(gambar/".$data['gambar'].")'><div class='captions'>".$data['keterangan']." 
+                            <button data-toggle='modal' data-target='#myModal".$data['id']."'>edit</button>
+                        </div></div>";
+                    }
+                      
+                    mysqli_close($koneksi); 
+                    ?>
+                </div>
+            </div>
+            
+            <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 col-md-12">
+                    <h2 style="color:  white;" class="text-center section-container-spacer">Tambahkan Foto</h2>
+                </div>
+                <p><center>Tambahkan foto daripada Departemen Teknologi Informasi, foto yang ditambahkan akan dipajang di laman ini.</center></p>
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="text" name="email" placeholder="Email" required class="form-control"><br>
+                        <textarea name="caption" placeholder="Caption" class="form-control"></textarea><br>
+                        <input type="file" name="gambar" required><br>
+                        <input type="submit" value="UPLOAD" name="save" class="btn btn-info">
+                        </form>
+                </div>
+                <?php
+                    $koneksi = new mysqli("localhost", "id4889425_root", "password", "id4889425_foto");
+                    if(mysqli_connect_errno()) {
+                    	echo "Gagal melakukan koneksi ke MySQL: " . $koneksi->connect_error;
+                    }
+                    
+                     if (isset($_POST['save'])){
+                     $fileName = $_FILES['gambar']['name'];
+                      // Simpan ke Database
+                      $sql = "INSERT INTO simpan (gambar, email, keterangan) VALUES ('$fileName', '" .$_POST['email']. "', '".$_POST['caption']."')";
+                      mysqli_query($koneksi, $sql);
+                      // Simpan di Folder Gambar
+                      move_uploaded_file($_FILES['gambar']['tmp_name'], "gambar/".$_FILES['gambar']['name']);
+                      echo"<script>alert('Gambar Berhasil diupload !'); location.reload();</script>"; 
+                    mysqli_close($koneksi);
+                     } 
+                    ?>
+        </div>
+    </div>
+</div>
+
+
+<div class="section-container section-half-background-image-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <h2>Jalur<br>Seleksi Masuk</h2>
+            </div>
+            <div class="col-xs-12 col-md-6">
+				<div style="padding: 10px; border: 2px solid rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;"><a href="https://snmptn.ac.id" target="_blank" style="text-decoration: none"><big>SNMPTN</big></a></div>
+				<div style="padding: 10px; border: 2px solid rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;"><a href="https://sbmptn.ac.id" target="_blank" style="text-decoration: none"><big>SBMPTN</big></a></div>
+				<div style="padding: 10px; border: 2px solid rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;"><a href="https://smits.its.ac.id/sarjana/#pkm" target="_blank" style="text-decoration: none"><big>PKM</big></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="section-container" id="contact-section-container">
     <div class="container contact-form-container">
         <div class="row">
@@ -319,7 +398,7 @@ Institut Teknologi Sepuluh Nopember
                 <div class="section-container-spacer">
                     <h2 class="text-center">Hubungi Kami</h2>
                 </div>
-                
+				<div id="success" class="section-container-spacer" style="display: none; padding: 30px; text-align: center; border: 2px solid rgba(199,199,199,.5)"></div>
                 <form action="contact.php" method="post" id="form-email">
                     <div class="row">
                         <div class="col-md-6">
@@ -363,12 +442,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 $(document).ready(function(){
     $('#btn-email').click(function(){
         $.post("contact.php", $("#form-email").serialize(), function(response) {
-            $('#form-email input, #form-email textarea').text("");
-            $('#success').html(response).fadeIn(500);
-            $('#success a').click(function(){
-                $('#success').fadeOut(500);
-                return false;
-            });
+            $('#success').html(response).fadeIn(500).delay(800).fadeOut(300);
         });
         return false;
     });
