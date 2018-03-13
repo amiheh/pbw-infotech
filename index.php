@@ -321,23 +321,7 @@ Institut Teknologi Sepuluh Nopember
                 </div>
                 <div class="col-xs-12 col-md-12">
                 <style> .foto-galeri { height: 200px; background: #aaa; padding: 0; overflow: hidden; text-align: center; background-size: cover; position: relative; } .captions { opacity: 0; position: absolute; color: #fff; background: rgba(51,51,51,.5); transition-duration: .3s; padding: 15px; width: 100%; height: 100%} .captions:hover { opacity: 1} </style>
-                <?php
-                    $koneksi = new mysqli("localhost", "id4889425_root", "password", "id4889425_foto");
-                    if(mysqli_connect_errno()) {
-                    	echo "Gagal melakukan koneksi ke MySQL: " . $koneksi->connect_error;
-                    }
-                    
-                    $sql = "select * FROM simpan ORDER BY id DESC LIMIT 4";
-                    $tampil = mysqli_query($koneksi,$sql);
-                    while ($data = mysqli_fetch_array($tampil)){
-                    // Tampilkan Gambar
-                        echo "<div class='col-xs-6 col-md-6 foto-galeri' style='background-image: url(gambar/".$data['gambar'].")'><div class='captions'>".$data['keterangan']." 
-                            <button data-toggle='modal' data-target='#myModal".$data['id']."'>edit</button>
-                        </div></div>";
-                    }
-                      
-                    mysqli_close($koneksi); 
-                    ?>
+                <?php include "show.php" ?>
                 </div>
             </div>
             
