@@ -27,7 +27,7 @@ class Crud extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload('berkas')){
+		if ( ! $this->upload->do_upload('gambar')){
 			echo "<script>window.alert("Upload error");</script>";
 		}else{
 		$data = array(
