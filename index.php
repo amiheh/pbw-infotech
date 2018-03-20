@@ -1,463 +1,315 @@
-<!-- Add your content of head and header -->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta content="IE=edge" http-equiv="X-UA-Compatible">
-  <meta content="width=device-width,initial-scale=1" name="viewport">
-  <meta content="description" name="description">
-  <meta name="google" content="notranslate" />
-  <meta content="Teknologi Informasi" name="author">
-
-  <!-- Disable tap highlight on IE -->
-  <meta name="msapplication-tap-highlight" content="no">
-  
-  <link href="" rel="apple-touch-icon">
-  <link href="" rel="icon">
-
-  <title>Teknologi Informasi ITS</title>  
-
-<link href="./main.97292821.css" rel="stylesheet"></head>
-
 <?php
-$number = rand(0,3);
-$number2 = rand(0,3);
-while ($number == $number2) $number2 = rand(0,3);
-$reason = array("Saat ini banyak terdapat hacker di dunia siber, oleh karena itu diperlukan anti keamanan siber dan aplikasi untuk mengurangi penipuan (fraud)", 
-"Program Studi Teknologi Informasi dapat mencetak lulusan yang mempunyai keahlian di bidang layanan awan, yang berkontribusi dalam meningkatkan kuantitas dan kualitas SDM, sehingga dapat meningkatkan efisiensi operasional organisasi.", 
-"Memiliki kemampuan untuk menghasilkan SDM yang ahli dalam bidang integrasi sistem sebagai solusi untuk mendukung penanganan aplikasi-aplikasi di instansi pemerintahan (E-Gov)", 
-"Memfasilitasi otomatisasi proses bisnis di organisasi untuk menghadapi perkembangan teknologi internet yang pesat dalam rangka mendukung pengembangan Teknologi Smart City");
-# echo $reason[$number] . "<br>";
-# echo $reason[$number2];
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
+{
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
+
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
+
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
+
+/*
+ *---------------------------------------------------------------
+ * SYSTEM DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" directory.
+ * Set the path if it is not in the same directory as this file.
+ */
+	$system_path = 'system';
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * directory than the default one you can set its name here. The directory
+ * can also be renamed or relocated anywhere on your server. If you do,
+ * use an absolute (full) server path.
+ * For more info please see the user guide:
+ *
+ * https://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
+
+/*
+ *---------------------------------------------------------------
+ * VIEW DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view directory out of the application
+ * directory, set the path to it here. The directory can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application directory.
+ * If you do move this, use an absolute (full) server path.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
 
 
-$number3 = rand(0,4);
-$quote = array(
-"Kegiatan siber nasional terutama pengamatan siber ini merupakan keharusan, keniscayaan..",
-"Suatu hari nanti komputasi akan menjadi infrastruktur publik seperti listrik dan telepon.",
-"Smart City menciptakan perubahan sistem lebih efektif dan efisien dalam lembaga pemerintahan.",
-"Jika kita tidak memecahkan masalah keamanan, maka orang-orang akan ragu.",
-"Sistem yang terintegrasi dalam suatu perusahaan dapat meningkatkan penghematan atau efisiensi"
-);
-$info = array(
-	array("Wiranto", "Menkopolhukam"),
-	array("John McCarty", "Pakar Komputasi MIT"),
-	array("Rudiantara", "Menkominfo"),
-	array("Bill Gates", "Microsoft"),
-	array("Darwin Widjaja", "Praktisi Teknologi Informasi")
-);
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" directory.  Leave blank
+	// if your controller is not in a sub-directory within the "controllers" one
+	// $routing['directory'] = '';
 
-# echo "<br><br><br>" . $quote[$number3] . "<br>";
-# echo $info[$number3][0] . $info[$number3][1];
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
 
-?>
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
 
-<body>
 
- <!-- Add your content of header -->
-<header>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-
-      <div class="navbar-collapse">
-        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/" title="" class="anchor-link">Profil</a></li>
-            <li><a href="/" title="" class="anchor-link">Akademik</a></li>
-            <li><a href="/" title="" class="anchor-link">Kurikulum</a></li>
-            <li><a href="/" title="" class="anchor-link">Staf</a></li>
-            <li><a href="/" title="" class="anchor-link">Fasilitas</a></li>
-            <li><a href="/" title="" class="anchor-link">Prestasi</a></li>
-            <li><a href="/" title="" class="anchor-link">Agenda</a></li>
-			<!--<li><a href="/" class="btn btn-default navbar-btn">Log In</a></li>-->
-        </ul>
-
-      </div>
-    </div>
-  </nav>
-</header>
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
 
 
-<!-- Add your site or app content here -->
-<div class="background-image-container white-text-container" style="background-image: url('http://1.bp.blogspot.com/-PhjNrDZOiA0/U93nEsw3PdI/AAAAAAAAArk/BlQsHENkliA/s1600/teknik-informatika-its.jpg'); background-position: bottom">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <p style="margin-bottom: -23px;">Program Studi Sarjana (S1)</p>
-                <h1>Teknologi Informasi</h1>
-                <p class="">Fakultas Teknologi Informasi & Komunikasi<br>
-Institut Teknologi Sepuluh Nopember
-				</p>
-                <a href="#contact-section-container" class="btn btn-primary btn-lg anchor-link" title="">Kenali Lebih Lanjut</a>
-            </div>
-        </div>
-    </div>
-</div>
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
 
-<div class="section-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-12 section-container-spacer">
-                <h2 class="text-center">Visi</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <h3 class="text-center"></h3>
-                <p><big><center>"Menjadi Program Studi Teknologi Informasi yang unggul dalam bidang keamanan siber dan teknologi berbasis Internet (Internet of Things) untuk mendukung pembangunan Smart City secara berkelanjutan hingga tahun 2022."</center></big></p>
-            </div>
-        </div>
-    </div>
-</div>
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
 
-	
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
 
-<div class="section-container section-half-background-image-container">
-    <div class="image-column" style="background-image: url('./assets/images/img-01.jpg')"></div>
-    <div class="container">
-        <div class="row">
-            <div class="section-label reveal">
-                <p style="text-align: center">MI<br>SI</p>
-            </div>
-            <div class="col-md-6 col-md-offset-6 text-column">
-                <h2>Misi Departemen Teknologi Informasi</h2>
-				<ol>
-					<li>Menyelenggarakan pendidikan dan pengajaran Teknologi Informasi dengan menggunakan kurikulum yang adaptif, berorientasi ke masa depan dan didukung SDM yang berkualitas serta fasilitas yang memadai. </li>
-					<li>Melaksanakan penelitian yang bermutu di bidang Keamanan Siber dan Internet of Things untuk teknologi Smart City.</li>
-					<li>Menjalin kemitraan dengan instansi dalam maupun luar negeri. </li>
-					<li>Menyelenggarakan pengabdian kepada masyarakat berupa pelatihan, penyuluhan, penerapan hasil penelitian untuk pengembagan potensi dan pemberdayaan masyarakat daerah.</li>
-				</ol>
-            </div>
-        </div>
-    </div>
-</div>
-	
-	
-	
-<div class="section-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6 section-container-spacer">
-                <h2>Profil<br>Lulusan</h2>
-            </div>
-        <div class="col-xs-12 col-md-6" id="profil" style="text-align: center">
-            <div class="col-xs-12 col-md-4">
-                <div class="fa-container">
-                    <i class="fa fa-shield fa-3x" aria-hidden="true"></i>
-                </div>
-                <h3 class="text-center">Spesialis Keamanan Siber</h3>
-                <p><em>Cyber Security Specialist</em></p>
-            </div>
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = strtr(
+			rtrim($system_path, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		).DIRECTORY_SEPARATOR;
+	}
 
-            <div class="col-xs-12 col-md-4">
-                <div class="fa-container">
-                    <i class="fa fa-line-chart fa-3x" aria-hidden="true"></i>
-                </div>
-                <h3 class="text-center">Analisis Keamanan Aplikasi</h3>
-                <p><em>Application Security Analyst</em></p>
-            </div>
-			
-            <div class="col-xs-12 col-md-4">
-                <div class="fa-container">
-                    <i class="fa fa-cloud-upload fa-3x" aria-hidden="true"></i>
-                </div>
-                <h3 class="text-center">Pengembang Layanan Awan</h3>
-                <p><em>Cloud Service Developer</em></p>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <div class="fa-container">
-                    <i class="fa fa-repeat fa-3x" aria-hidden="true"></i>
-                </div>
-                <h3 class="text-center">Spesialis Integrasi Sistem</h3>
-                <p><em>System Integration Specialist</em></p>
-            </div>
-			
-            <div class="col-xs-12 col-md-4">
-                <div class="fa-container">
-                    <i class="fa fa-mobile-phone fa-3x" aria-hidden="true"></i>
-                </div>
-                <h3 class="text-center">Spesialis Internet Of Things</h3>
-                <p><em>Internet Of Things Specialist</em></p>
-            </div>
-			</div>
-        </div>
-    </div>
-</div>
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
 
-<div class="section-container section-half-background-image-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-column">
-                <h2>Mengapa <br>Teknologi Informasi?</h2>
-            </div>
-            <div class="col-md-6 text-column">
-				<div style="padding: 40px; background-color: rgba(199,199,199,.5)"><?php echo $reason[$number] ?></div>
-				<div style="padding: 40px; background-color: rgba(199,199,199,.5); margin-top: 5px"><?php echo $reason[$number2] ?></div>
-            </div>
-        </div>
-    </div>
-</div>
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
-<div class="section-container section-half-background-image-container" style="background:#2b2b2b;color:#ddd;">
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-offset-1 col-md-10">
-                <h2 class="text-center"><small style="color: white"><?php echo $quote[$number3] ?></small></h2>
-					<center><b><?php echo $info[$number3][0] ?></b></strong>, <em><?php echo $info[$number3][1] ?></em></center>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="section-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-12 section-container-spacer">
-                <h2 class="text-center">Fasilitas</h2>
-            </div>
-        </div>
-        <div class="row" id="fasilitas">
-            <div class="col-xs-12 col-md-4">
-                <img src="http://hmtc.if.its.ac.id/wp-content/uploads/2013/10/1276188_702134413149000_219808502_o.jpg" alt="" class="img-responsive">
-                <h3 class="text-center">Laboratorium</h3>
-                <p>Terdapat 2 laboratorium komputer (Lab Keamanan Siber dan Lab Teknologi <em>Smart City</em>). Seluruh Komputer telah dilengkapi oleh perangkat lunak yang dapat digunakan untuk mendukung kegiatan praktikum maupun kegiatan akademis lainnya.</p>
-            </div>
+	// Path to the system directory
+	define('BASEPATH', $system_path);
 
-            <div class="col-xs-12 col-md-4">
-                <img src="https://static.wixstatic.com/media/ac60a3_5f65db02ae04446183bda83cc35fba18.jpg/v1/fill/w_768,h_576,al_c,lg_1,q_80/ac60a3_5f65db02ae04446183bda83cc35fba18.webp" alt="" class="img-responsive">
-                <h3 class="text-center">Ruang Baca</h3>
-                <p>Memiliki berbagai macam koleksi mulai dari fiksi hingga materi perkuliahan, dari bahan cetak hingga koleksi digital seperti CD-ROM, CD, VCD dan DVD. Selain itu juga menyediakan publikasi serial harian dan bulanan seperti surat kabar dan majalah.</p>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <img src="http://pikti.if.its.ac.id/wp-content/uploads/2017/09/WA-IMAGE-1-768x576.jpeg" alt="" class="img-responsive">
-                <h3 class="text-center">Ruang Kelas</h3>
-                <p>Setiap ruang kelas dilengkapi dengan pendingin ruangan dan LCD serta akses internet gratis yang dapat mendukung kegiatan akademis mahasiswa.</p>
-            </div>
-        </div>
-    </div>
-</div>
+	// Path to the front controller (this file) directory
+	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 
-<div class="section-container section-half-background-image-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-12 section-container-spacer">
-                <h2 class="text-center">Jenis Peluang Kerja</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-				<div style="padding: 10px; background-color: rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;">Komputasi Awan dan Komputasi Terdistribusi Cloud</div>
-				<div style="padding: 10px; background-color: rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;">Arsitektur Web dan Pengembangan Framework</div>
-				<div style="padding: 10px; background-color: rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;">Rancangan Antarmuka Pengguna</div>
-			</div>
-			
-            <div class="col-xs-12 col-md-6">
-				<div style="padding: 10px; background-color: rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;">Manajemen Penyimpanan Data</div>
-				<div style="padding: 10px; background-color: rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;">Keamanan Informasi dan Jaringan</div>
-				<div style="padding: 10px; background-color: rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;">Integrasi Perangkat Lunak dan Middleware</div>
-				
-            </div>
-        </div>
-    </div>
-</div>
+	// Name of the "system" directory
+	define('SYSDIR', basename(BASEPATH));
 
-<div class="">
-    <div class='container-fluid'>
-        <div class="row map-container">
-            <div id="map"></div>
-            <div class="col-xs-10 col-md-4 contact-block-container reveal">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                        <h3>Kontak</h3>
-                        <p>
-                            <a href="https://www.twitter.com" class="fa-icon" title="">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-							</a>
-                            <a href="https://www.facebook.com" class="fa-icon" title="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://www.instagram.com" class="fa-icon" title="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                        </p>
+	// The path to the "application" directory
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+		else
+		{
+			$application_folder = strtr(
+				rtrim($application_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+	{
+		$application_folder = BASEPATH.strtr(
+			trim($application_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
 
-                        <h3>E-mail</h3>
-                        <p>teknologi.informasi<br>
-							@its.ac.id</p>
+	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 
-                    </div>
+	// The path to the "views" directory
+	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.'views';
+	}
+	elseif (is_dir($view_folder))
+	{
+		if (($_temp = realpath($view_folder)) !== FALSE)
+		{
+			$view_folder = $_temp;
+		}
+		else
+		{
+			$view_folder = strtr(
+				rtrim($view_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.strtr(
+			trim($view_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
 
-                    <div class="col-xs-12 col-sm-6">
-                        <h3>Alamat</h3>
-                        <p>Teknik Informatika ITS<br />
-						Sukolilo, Surabaya</p>
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
-                        <h3>Jam Kerja</h3>
-                        <p>Mon - Fri : 7AM - 4PM</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="section-container section-half-background-image-container" style="background:  #333;">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <div class="col-xs-12 col-md-12">
-                    <h2 style="color:  white;" class="text-center section-container-spacer">Galeri</h2>
-                </div>
-                <div class="col-xs-12 col-md-12">
-                <style> .foto-galeri { height: 200px; background: #aaa; padding: 0; overflow: hidden; text-align: center; background-size: cover; position: relative; } .captions { opacity: 0; position: absolute; color: #fff; background: rgba(51,51,51,.5); transition-duration: .3s; padding: 15px; width: 100%; height: 100%} .captions:hover { opacity: 1} </style>
-                <?php include "show.php" ?>
-                </div>
-            </div>
-            
-            <div class="col-xs-12 col-md-6">
-                <div class="col-xs-12 col-md-12">
-                    <h2 style="color:  white;" class="text-center section-container-spacer">Tambahkan Foto</h2>
-                </div>
-                <p><center>Tambahkan foto daripada Departemen Teknologi Informasi, foto yang ditambahkan akan dipajang di laman ini.</center></p>
-                    <form method="post" enctype="multipart/form-data">
-                        <input type="text" name="email" placeholder="Email" required class="form-control"><br>
-                        <textarea name="caption" placeholder="Caption" class="form-control"></textarea><br>
-                        <input type="file" name="gambar" required><br>
-                        <input type="submit" value="UPLOAD" name="save" class="btn btn-info">
-                        </form>
-                </div>
-                <?php
-                    $koneksi = new mysqli("localhost", "id4889425_root", "password", "id4889425_foto");
-                    if(mysqli_connect_errno()) {
-                    	echo "Gagal melakukan koneksi ke MySQL: " . $koneksi->connect_error;
-                    }
-                    
-                     if (isset($_POST['save'])){
-                     $fileName = $_FILES['gambar']['name'];
-                      // Simpan ke Database
-                      $sql = "INSERT INTO simpan (gambar, email, keterangan) VALUES ('$fileName', '" .$_POST['email']. "', '".$_POST['caption']."')";
-                      mysqli_query($koneksi, $sql);
-                      // Simpan di Folder Gambar
-                      move_uploaded_file($_FILES['gambar']['tmp_name'], "gambar/".$_FILES['gambar']['name']);
-                      echo"<script>alert('Gambar Berhasil diupload !'); location.reload();</script>"; 
-                    mysqli_close($koneksi);
-                     } 
-                    ?>
-        </div>
-    </div>
-</div>
-
-
-<div class="section-container section-half-background-image-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <h2>Jalur<br>Seleksi Masuk</h2>
-            </div>
-            <div class="col-xs-12 col-md-6">
-				<div style="padding: 10px; border: 2px solid rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;"><a href="https://snmptn.ac.id" target="_blank" style="text-decoration: none"><big>SNMPTN</big></a></div>
-				<div style="padding: 10px; border: 2px solid rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;"><a href="https://sbmptn.ac.id" target="_blank" style="text-decoration: none"><big>SBMPTN</big></a></div>
-				<div style="padding: 10px; border: 2px solid rgba(199,199,199,.5); margin-bottom: 5px; text-align: center; border-top-right-radius: 15px 40px; border-bottom-right-radius: 15px 40px;"><a href="https://smits.its.ac.id/sarjana/#pkm" target="_blank" style="text-decoration: none"><big>PKM</big></a></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="section-container" id="contact-section-container">
-    <div class="container contact-form-container">
-        <div class="row">
-            <div class="col-xs-12 col-md-offset-2 col-md-8">
-                <div class="section-container-spacer">
-                    <h2 class="text-center">Hubungi Kami</h2>
-                </div>
-				<div id="success" class="section-container-spacer" style="display: none; padding: 30px; text-align: center; border: 2px solid rgba(199,199,199,.5)"></div>
-                <form action="contact.php" method="post" id="form-email">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Nama">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="Email">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" name="subject" placeholder="Judul"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" name="message" rows="3" placeholder="Pesan"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-info" id="btn-email">Kirim Pesan</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function (event) {
-    
-  googleMapInit(); 
-  scrollToAnchor();
-  scrollRevelation('reveal');
-});
-
-
-$(document).ready(function(){
-    $('#btn-email').click(function(){
-        $.post("contact.php", $("#form-email").serialize(), function(response) {
-            $('#success').html(response).fadeIn(500).delay(800).fadeOut(300);
-        });
-        return false;
-    });
-});
-</script>
-
-<footer class="footer-container white-text-container">
-    <div class="container">
-        <div class="row">
-                <div class="col-md-12" style="text-align: center">
-                            <a href="https://www.twitter.com" class="fa-icon" title="">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-							</a>
-                            <a href="https://www.facebook.com" class="fa-icon" title="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://www.instagram.com" class="fa-icon" title="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                </div>
-        </div>
-    </div>
-</footer>
-
-<script>
-document.addEventListener("DOMContentLoaded", function (event) {
-  navbarToggleSidebar();
-});
-</script>
-
-
-<script type="text/javascript" src="./main.faaf51f9.js"></script>
-</body>
-</html>
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
