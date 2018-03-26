@@ -2,15 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Crud extends CI_Controller {
-	public function __construct()
-	{
-		parent::__construct();
+	function __construct(){
+		parent::__construct();		
+		$this->load->model('m_data');
+                $this->load->helper('url');
 	}
-	public function index()
-	{
-		$data['content'] = $this->db->get('simpan');
-		$this->load->view('show');
+ 
+	function index(){
+		$data['simpan'] = $this->m_data->tampil_data()->result();
+		$this->load->view('show',$data);
 	}
+	
 	public function add()
 	{
 		$this->load->view('tambah_foto');
@@ -27,8 +29,8 @@ class Crud extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload('gambar')){
-			echo "<script>window.alert("Upload error");</script>";
+		if (!$this->upload->do_upload('berkas') ){
+			echo "<script>window.alert("Upload error");</script>"
 		}else{
 		$data = array(
 			'gambar' => $this->upload->data()['file_name'], 
@@ -36,7 +38,7 @@ class Crud extends CI_Controller {
 			'keterangan' => $this->input->post(caption) 
 		);
 
-		$this->db->insert('simpan', $data);
+		$this->m_data->input_data($data, 'simpan')
 
 			echo "<script>window.alert("Upload berhasil");</script>";
 		redirect('index','refresh');
@@ -44,30 +46,33 @@ class Crud extends CI_Controller {
 		
 	}
 
-	public function update($id=NULL)
+	public function edit($id)
 	{
-		$this->db->where('id', $id);
-		$data['content'] = $this->db->get('simpan');
+		$where = array('id' => $id);
+		$data['user'] = $this->m_data->edit_data($where,'simpan')->result();
 		$this->load->view('update', $data);
 	}
 
-	public function action_update($id=NULL)
+	public function action_update($id)
 	{
 		$data = array(
 			'gambar' => $this->input->post(gambar), 
 			'email' => $this->input->post(email), 
 			'keterangan' => $this->input->post(caption) 
 		);
-		$this->db->where('id', $id);
-		$this->db->update('simpan', $data);
-		redirect('index','refresh');
+ 
+		$where = array(
+			'id' => $id
+		);
+	 
+		$this->m_data->update_data($where,$data,'simpan');
+		redirect('index', 'refresh');
 	}
 
-	public function delete($id=NULL)
+	public function delete($id)
 	{
-		$this->db->where('id', $id);
-		$this->db->delete('simpan');
-
+		$where = array('id' => $id);
+		$this->m_data->hapus_data($where,'simpan');
 		redirect('index','refresh');
 	}
 

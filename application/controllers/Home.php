@@ -7,7 +7,7 @@ class Home extends CI_Controller {
 	{
 		$data['show_photos'] = $this->load->view('show', '', TRUE);
 		$data['add_photos'] = $this->load->view('tambah_photo', '', TRUE);
-		$this->load->view ('user_profile', $data);
+		$this->load->view ('index', $data);
 	}
 
 	public function halamanprofil()

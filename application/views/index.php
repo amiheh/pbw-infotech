@@ -304,7 +304,7 @@ Institut Teknologi Sepuluh Nopember
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="col-xs-12 col-md-12">
-                <?php echo $show_photos; ?>
+                  	<?php echo $show_photos; ?>
                 </div>
             </div>
             
