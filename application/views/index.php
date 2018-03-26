@@ -304,7 +304,16 @@ Institut Teknologi Sepuluh Nopember
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="col-xs-12 col-md-12">
-                  	<?php echo $show_photos; ?>
+				  	<?php foreach ($photos as $data) {  ?>
+					<div class='col-xs-6 col-md-6 foto-galeri' style='background-image: url(gambar/<?php echo $data->gambar ?>'>
+						<div class='captions'>
+							<?php echo $data->keterangan ?>
+							<br><br><br>
+							<?php echo anchor('crud/edit/'.$data->id, 'Edit'); ?>
+							<?php echo anchor('crud/delete/'.$data->id, 'Delete'); ?>
+						</div>
+					</div>
+					<?php }; ?>
                 </div>
             </div>
             
@@ -312,8 +321,14 @@ Institut Teknologi Sepuluh Nopember
                 <div class="col-xs-12 col-md-12">
                     <h2 style="color:  white;" class="text-center section-container-spacer">Tambahkan Foto</h2>
                 </div>
-                <?php echo $add_photos; ?>
-                </div>
+				<p><center>Tampilkan foto terbaikmu dari Departemen Teknologi Informasi di laman ini.</center></p>
+					<form method="post" action="<?php echo base_url(). 'crud/action_add'; ?>" enctype="multipart/form-data">
+                        <input type="text" name="email" placeholder="Email" required class="form-control"><br>
+                        <textarea name="caption" placeholder="Caption" class="form-control"></textarea><br>
+                        <input type="file" name="gambar" required><br>
+                        <input type="submit" value="UPLOAD" name="save" class="btn btn-info">
+                        </form>
+            </div>
         </div>
     </div>
 </div>

@@ -3,8 +3,9 @@
 		function __construct() {
 			parent::__construct();
 		}
-		function form_insert($data){
-			$this->db->insert('students', $data);
+		function getData(){
+			$res = $this->db->get('simpan');
+			return $res->result_array();
 		}
 	}
 ?>

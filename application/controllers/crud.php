@@ -4,13 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Crud extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
+		$this->load->helper('url');
+		$this->load->helper(array('form', 'url'));
 		$this->load->model('m_data');
-                $this->load->helper('url');
+		$this->load->model('insert_model');
+        $this->load->database();
 	}
  
 	function index(){
-		$data['simpan'] = $this->m_data->tampil_data()->result();
-		$this->load->view('show',$data);
 	}
 	
 	public function add()
@@ -20,7 +21,6 @@ class Crud extends CI_Controller {
 
 	public function action_add()
 	{
-
 		$config['upload_path']          = './gambar/';
 		$config['allowed_types']        = 'gif|jpg|png';
 		$config['max_size']             = 100;
@@ -29,19 +29,17 @@ class Crud extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
-		if (!$this->upload->do_upload('berkas') ){
-			echo "<script>window.alert("Upload error");</script>"
-		}else{
+		if (!$this->upload->do_upload('gambar') ){
+			echo "<script>window.alert('Upload error');</script>";
+		} else {
 		$data = array(
 			'gambar' => $this->upload->data()['file_name'], 
 			'email' => $this->input->post(email), 
 			'keterangan' => $this->input->post(caption) 
 		);
 
-		$this->m_data->input_data($data, 'simpan')
-
-			echo "<script>window.alert("Upload berhasil");</script>";
-		redirect('index','refresh');
+		$this->m_data->input_data($data, 'simpan');
+		redirect('');
 		}
 		
 	}
@@ -66,14 +64,14 @@ class Crud extends CI_Controller {
 		);
 	 
 		$this->m_data->update_data($where,$data,'simpan');
-		redirect('index', 'refresh');
+		redirect('');
 	}
 
 	public function delete($id)
 	{
 		$where = array('id' => $id);
 		$this->m_data->hapus_data($where,'simpan');
-		redirect('index','refresh');
+		redirect('');
 	}
 
 }
