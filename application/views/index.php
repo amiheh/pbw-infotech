@@ -74,7 +74,7 @@ $info = array(
             <li><a href="/" title="" class="anchor-link">Fasilitas</a></li>
             <li><a href="/" title="" class="anchor-link">Prestasi</a></li>
             <li><a href="/" title="" class="anchor-link">Agenda</a></li>
-			<!--<li><a href="/" class="btn btn-default navbar-btn">Log In</a></li>-->
+			<li><a href="./crud" class="btn btn-default navbar-btn" style="padding-top: 15px; margin-top: 15px;">Buku Tamu</a></li>
         </ul>
 
       </div>
@@ -95,7 +95,7 @@ $info = array(
                 <p class="">Fakultas Teknologi Informasi & Komunikasi<br>
 Institut Teknologi Sepuluh Nopember
 				</p>
-                <a href="#more" class="btn btn-primary btn-lg anchor-link" title="">Selengkapnya</a>
+                <a href="./crud" class="btn btn-primary btn-lg anchor-link" title="">Isi Buku Tamu</a>
             </div>
         </div>
     </div>
@@ -322,7 +322,7 @@ Institut Teknologi Sepuluh Nopember
                     <h2 style="color:  white;" class="text-center section-container-spacer">Tambahkan Foto</h2>
                 </div>
 				<p><center>Tampilkan foto terbaikmu dari Departemen Teknologi Informasi di laman ini.</center></p>
-					<form method="post" action="<?php echo base_url(). 'crud/action_add'; ?>" enctype="multipart/form-data">
+					<form method="post" action="<?php echo base_url(). 'Home/action_add'; ?>" enctype="multipart/form-data">
                         <input type="text" name="email" placeholder="Email" required class="form-control"><br>
                         <textarea name="caption" placeholder="Caption" class="form-control"></textarea><br>
                         <input type="file" name="gambar" required><br>
